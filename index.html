@@ -1,0 +1,53 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Rapsberry Awards</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/fontawesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="components/elements/navbar-element.js"></script>
+    <script src="components/elements/sidebar-element.js"></script>
+    <script src="components/elements/dashboard-element.js"></script>
+    <script src="components/elements/top-winners-element.js"></script>
+    <script src="components/elements/list-movies-element.js" type="module"></script>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <nav-bar></nav-bar>
+        <div class="row">
+            <div class="col-md-2 col-sm-2 col-lg-2">
+                <side-bar id="side-bar"></side-bar>
+            </div>
+            <div class="col-md-9 col-sm-9 col-lg-9">
+                <dt-dashboard id="dashboard" style="display: block;"></dt-dashboard>
+                <list-movies id="list" style="display: none;"></list-movies>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+    $(document).ready(function () {
+        $('#side-bar').click(function (evt) {
+            const item = evt.target;
+            const optionsSideBar = item.shadowRoot.querySelectorAll('button');
+            optionsSideBar.forEach(it => {
+                if(it.classList.contains('active')) {
+                    $(`#${it.ariaLabel}`).show();
+                } else {
+                    $(`#${it.ariaLabel}`).hide();
+                }
+            })
+        })
+    })
+</script>

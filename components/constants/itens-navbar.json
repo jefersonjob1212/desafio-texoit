@@ -1,0 +1,12 @@
+[
+  {
+    "key" : "dashboard",
+    "description": "Dashboard", 
+    "icon": "bi-speedometer2" 
+  },
+  {
+    "key" : "list",
+    "description": "List", 
+    "icon": "bi-card-list" 
+  }
+]

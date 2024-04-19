@@ -1,0 +1,27 @@
+{
+  "name": "desafio-texoit",
+  "version": "1.0.0",
+  "description": "Avaliação para vaga de desenvolvedor Javascript para a TexoIT",
+  "main": "index.js",
+  "scripts": {
+    "start": "http-server",
+    "test": "web-test-runner \"test/**/*.test.js\" --node-resolve"
+  },
+  "keywords": [
+    "javascript",
+    "nodejs",
+    "bootstrap",
+    "jquery"
+  ],
+  "author": "Jeferson Job",
+  "license": "ISC",
+  "dependencies": {
+    "http-server": "^14.1.1"
+  },
+  "devDependencies": {
+    "@esm-bundle/chai": "^4.3.4-fix.0",
+    "@open-wc/testing": "^4.0.0",
+    "@web/test-runner": "^0.18.1",
+    "sinon": "^17.0.1"
+  }
+}

@@ -1,4 +1,4 @@
-const classListContainer = ["row", "row-cols-2"];
+const classListContainer = ["row"];
 
 const classColumn = [
   "col-md-6",
@@ -40,7 +40,7 @@ class DashboardElement extends HTMLElement {
     scriptByYear.type = "module";
 
     const divContainer = document.createElement('div');
-    divContainer.classList.add('container');
+    divContainer.classList.add(...['container', 'justify-content-between']);
 
     const divRowColsTwo = document.createElement("div");
     divRowColsTwo.classList.add(...classListContainer);

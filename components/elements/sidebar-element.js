@@ -1,11 +1,5 @@
 const stylesSideBar = [
-  "mh-100",
-  "d-flex",
-  "flex-column",
-  "flex-shrink-0",
-  "p-3",
-  "text-white",
-  "bg-body-tertiary",
+  "nav", "nav-pills", "flex-sm-column", "flex-row", "mb-auto", "justify-content-between", "text-truncate"
 ];
 
 const stylesUnmarkedList = ["nav", "nav-pills", "flex-column", "mb-auto"];
@@ -61,10 +55,12 @@ class SideBarElement extends HTMLElement {
           this.dataArray.forEach((element, index) => {
             const li = document.createElement("li");
             li.classList.add("nav-item");
+            // li.classList.add("col-sm-3");
             li.id = element.description;
 
             const button = document.createElement("button");
             button.classList.add("nav-link");
+            button.setAttribute('style', 'white-space: normal !important')
 
             if (index === 0) button.classList.add("active");
 

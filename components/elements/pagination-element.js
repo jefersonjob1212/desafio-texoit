@@ -122,8 +122,7 @@ class PaginationElement extends HTMLElement {
       lastPageNumber *= quociente + 1;
       lastPageNumber += 1;
       if (lastPageNumber > this.total) {
-        const difference = lastPageNumber - this.total;
-        lastPageNumber -= difference;
+        lastPageNumber = this.total - 1;
       }
     }
 

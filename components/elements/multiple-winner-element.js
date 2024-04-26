@@ -1,6 +1,6 @@
 import MovieService from "../services/movie-service.js";
 
-const classTable = ['table', 'table-bordered', 'table-striped']
+const classTable = ["table", "table-bordered", "table-striped"];
 
 class MultipleWinnerElement extends HTMLElement {
   constructor() {
@@ -11,22 +11,22 @@ class MultipleWinnerElement extends HTMLElement {
   }
 
   connectedCallback() {
-    const shadow = this.attachShadow({ mode: 'open' });
+    const shadow = this.attachShadow({ mode: "open" });
 
     const linkCss = document.createElement("link");
     linkCss.rel = "stylesheet";
     linkCss.href = "assets/css/bootstrap.min.css";
 
-    const table = document.createElement('table');
+    const table = document.createElement("table");
     table.classList.add(...classTable);
     const thead = table.createTHead();
-    
-    const tableRowHeader = document.createElement('tr');
-    const tableColumnHeadYear = document.createElement('th');
-    const tableColumnHeadCount = document.createElement('th');
 
-    tableColumnHeadYear.innerText = 'Year';
-    tableColumnHeadCount.innerText = 'Win Count';
+    const tableRowHeader = document.createElement("tr");
+    const tableColumnHeadYear = document.createElement("th");
+    const tableColumnHeadCount = document.createElement("th");
+
+    tableColumnHeadYear.innerText = "Year";
+    tableColumnHeadCount.innerText = "Win Count";
 
     tableRowHeader.appendChild(tableColumnHeadYear);
     tableRowHeader.appendChild(tableColumnHeadCount);
@@ -34,6 +34,10 @@ class MultipleWinnerElement extends HTMLElement {
     table.appendChild(thead);
 
     const tbody = table.createTBody();
+
+    const divTable = document.createElement('div');
+    divTable.classList.add('table-responsive');
+    divTable.appendChild(table);
 
     const service = this.definitions.movieService;
     service.prototype
@@ -57,22 +61,22 @@ class MultipleWinnerElement extends HTMLElement {
       })
       .then((data) => {
         const years = data.years;
-        years.forEach(item => {
-            const tableRow = document.createElement('tr');
-            const tableColumnYear = document.createElement('td');
-            const tableColumnCount = document.createElement('td');
+        years.forEach((item) => {
+          const tableRow = document.createElement("tr");
+          const tableColumnYear = document.createElement("td");
+          const tableColumnCount = document.createElement("td");
 
-            tableColumnYear.innerText = item.year;
-            tableColumnCount.innerText = item.winnerCount;
+          tableColumnYear.innerText = item.year;
+          tableColumnCount.innerText = item.winnerCount;
 
-            tableRow.appendChild(tableColumnYear);
-            tableRow.appendChild(tableColumnCount);
-            tbody.appendChild(tableRow);
+          tableRow.appendChild(tableColumnYear);
+          tableRow.appendChild(tableColumnCount);
+          tbody.appendChild(tableRow);
         });
-        
+
         table.appendChild(tbody);
-        shadow.appendChild(table);
-        shadow.append(linkCss)
+        shadow.appendChild(divTable);
+        shadow.append(linkCss);
       })
       .catch((err) => console.error(err));
   }

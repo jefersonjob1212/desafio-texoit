@@ -35,6 +35,10 @@ export default class TopWinnersElement extends HTMLElement {
 
     const tbody = table.createTBody();
 
+    const divTable = document.createElement('div');
+    divTable.classList.add('table-responsive');
+    divTable.appendChild(table);
+
     const service = this.definitions.movieService;
     service.prototype
       .getTopWinnerStudios()
@@ -72,7 +76,7 @@ export default class TopWinnersElement extends HTMLElement {
         }
 
         table.appendChild(tbody);
-        shadow.appendChild(table);
+        shadow.appendChild(divTable);
         shadow.append(linkCss);
       })
       .catch((err) => console.error(err));

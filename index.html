@@ -20,16 +20,20 @@
 </head>
 
 <body>
-    <div class="container-fluid">
+    <header class="container-fluid">
         <nav-bar></nav-bar>
+    </header>
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-md-2 col-sm-2 col-lg-2">
-                <side-bar id="side-bar"></side-bar>
-            </div>
-            <div class="col-md-9 col-sm-9 col-lg-9">
+            <aside class="col-md-3 col-sm-3 col-lg-3 flex-grow-sm-1 flex-shrink-1 flex-grow-0 sticky-top pb-sm-0 pb-3">
+                <div class="bg-light border rounded-3 p-1 h-100 sticky-top">
+                    <side-bar id="side-bar"></side-bar>
+                </div>
+            </aside>
+            <main class="col-md-9 col-sm-9 col-lg-9 overflow-auto h-100">
                 <dt-dashboard id="dashboard" style="display: block;"></dt-dashboard>
                 <list-movies id="list" style="display: none;"></list-movies>
-            </div>
+            </main>
         </div>
     </div>
 </body>
@@ -42,7 +46,7 @@
             const item = evt.target;
             const optionsSideBar = item.shadowRoot.querySelectorAll('button');
             optionsSideBar.forEach(it => {
-                if(it.classList.contains('active')) {
+                if (it.classList.contains('active')) {
                     $(`#${it.ariaLabel}`).show();
                 } else {
                     $(`#${it.ariaLabel}`).hide();

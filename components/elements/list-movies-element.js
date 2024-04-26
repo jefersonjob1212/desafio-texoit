@@ -134,6 +134,7 @@ class ListMoviesElement extends HTMLElement {
     winnerElement.classList.add('form-control')
     winnerElement.addEventListener("change", (evt) => {
       this.filterWinner = evt.target.value;
+      this.page = 0;
       this.applyFilter();
     });
 
@@ -230,8 +231,13 @@ class ListMoviesElement extends HTMLElement {
             row.appendChild(columnIsWinner);
 
             this.tbody.appendChild(row);
-            this.pagination.setAttribute('total-pages', this.totalPages);
-            this.pagination.setAttribute('current-page', this.page);
+        }
+        if(this.totalPages > 0) {
+          this.pagination.hidden = false;
+          this.pagination.setAttribute('total-pages', this.totalPages);
+          this.pagination.setAttribute('current-page', this.page);
+        } else {
+          this.pagination.hidden = true;
         }
       })
       .catch((err) => console.error(err));

@@ -1,6 +1,6 @@
 import MovieService from "../services/movie-service.js";
 
-const classTable = ['table', 'table-bordered', 'table-striped']
+const classTable = ["table", "table-bordered", "table-striped"];
 
 class IntervalProducersElement extends HTMLElement {
     constructor() {
@@ -20,53 +20,12 @@ class IntervalProducersElement extends HTMLElement {
         shadow.append(linkCss);
     
         //Maximum producer
-        const tableMaximum = document.createElement('table');
-        tableMaximum.classList.add(...classTable);
-        const theadMaximum = tableMaximum.createTHead();
-        
-        const tableRowHeaderMaximum = document.createElement('tr');
-        const tableColumnHeadProducerMaximum = document.createElement('th');
-        const tableColumnHeadIntervalMaximum = document.createElement('th');
-        const tableColumnHeadPreviousMaximum = document.createElement('th');
-        const tableColumnHeadFollowingMaximum = document.createElement('th');
-    
-        tableColumnHeadProducerMaximum.innerText = 'Producer';
-        tableColumnHeadIntervalMaximum.innerText = 'Interval';
-        tableColumnHeadPreviousMaximum.innerText = 'Previous Year';
-        tableColumnHeadFollowingMaximum.innerText = 'Following Year';
-    
-        tableRowHeaderMaximum.appendChild(tableColumnHeadProducerMaximum);
-        tableRowHeaderMaximum.appendChild(tableColumnHeadIntervalMaximum);
-        tableRowHeaderMaximum.appendChild(tableColumnHeadPreviousMaximum);
-        tableRowHeaderMaximum.appendChild(tableColumnHeadFollowingMaximum);
-
-        theadMaximum.appendChild(tableRowHeaderMaximum);
-        tableMaximum.appendChild(theadMaximum);
+        const tableMaximum = this.createTable();
     
         const tbodyMaximum = tableMaximum.createTBody();
         
         // Minimum producer
-        const tableMinimum = document.createElement('table');
-        tableMinimum.classList.add(...classTable);
-        const theadMinimum = tableMinimum.createTHead();
-        
-        const tableRowHeaderMinimum = document.createElement('tr');
-        const tableColumnHeadProducerMinimum = document.createElement('th');
-        const tableColumnHeadIntervalMinimum = document.createElement('th');
-        const tableColumnHeadPreviousMinimum = document.createElement('th');
-        const tableColumnHeadFollowingMinimum = document.createElement('th');
-    
-        tableColumnHeadProducerMinimum.innerText = 'Producer';
-        tableColumnHeadIntervalMinimum.innerText = 'Interval';
-        tableColumnHeadPreviousMinimum.innerText = 'Previous Year';
-        tableColumnHeadFollowingMinimum.innerText = 'Following Year';
-       
-        tableRowHeaderMinimum.appendChild(tableColumnHeadProducerMinimum);
-        tableRowHeaderMinimum.appendChild(tableColumnHeadIntervalMinimum);
-        tableRowHeaderMinimum.appendChild(tableColumnHeadPreviousMinimum);
-        tableRowHeaderMinimum.appendChild(tableColumnHeadFollowingMinimum);
-        theadMinimum.appendChild(tableRowHeaderMinimum);
-        tableMinimum.appendChild(theadMinimum);
+        const tableMinimum = this.createTable();
     
         const tbodyMinimum = tableMinimum.createTBody();
 
@@ -78,6 +37,12 @@ class IntervalProducersElement extends HTMLElement {
 
         pMax.innerText = 'Maximum';
         pMin.innerText = 'Minimum';
+
+        const divTableMax = document.createElement('div');
+        divTableMax.classList.add('table-responsive');
+        
+        const divTableMin = document.createElement('div');
+        divTableMin.classList.add('table-responsive');
     
         const service = this.definitions.movieService;
         service.prototype
@@ -122,7 +87,8 @@ class IntervalProducersElement extends HTMLElement {
             tbodyMaximum.appendChild(tableRowMaximum);
             
             tableMaximum.appendChild(tbodyMaximum);
-            shadow.appendChild(tableMaximum);
+            divTableMax.appendChild(tableMaximum);
+            shadow.appendChild(divTableMax);
             
             const tableRowMinimum = document.createElement('tr');
             const tableColumnProducerMinimum = document.createElement('td');
@@ -143,9 +109,43 @@ class IntervalProducersElement extends HTMLElement {
             tbodyMinimum.appendChild(tableRowMinimum);
             
             tableMinimum.appendChild(tbodyMinimum);
-            shadow.appendChild(tableMinimum);
+            divTableMin.appendChild(tableMinimum);
+            shadow.appendChild(divTableMin);
           })
           .catch((err) => console.error(err));
+      }
+
+      createTable() {
+        const table = document.createElement('table');
+        table.classList.add(...classTable);
+        const thead = table.createTHead();
+        
+        const tableRowHeader = document.createElement('tr');
+        const tableColumnHeadProducer = document.createElement('th');
+        const tableColumnHeadInterval = document.createElement('th');
+        const tableColumnHeadPrevious = document.createElement('th');
+        const tableColumnHeadFollowing = document.createElement('th');
+    
+        tableColumnHeadProducer.setAttribute("scope", "col");
+        tableColumnHeadProducer.innerText = 'Producer';
+
+        tableColumnHeadInterval.setAttribute("scope", "col");
+        tableColumnHeadInterval.innerText = 'Interval';
+
+        tableColumnHeadPrevious.setAttribute("scope", "col");
+        tableColumnHeadPrevious.innerText = 'Previous Year';
+
+        tableColumnHeadFollowing.setAttribute("scope", "col");
+        tableColumnHeadFollowing.innerText = 'Following Year';
+    
+        tableRowHeader.appendChild(tableColumnHeadProducer);
+        tableRowHeader.appendChild(tableColumnHeadInterval);
+        tableRowHeader.appendChild(tableColumnHeadPrevious);
+        tableRowHeader.appendChild(tableColumnHeadFollowing);
+
+        thead.appendChild(tableRowHeader);
+        table.appendChild(thead);
+        return table;
       }
 }
 
